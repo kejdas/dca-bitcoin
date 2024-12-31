@@ -1,0 +1,109 @@
+body {
+    margin-top: 20px;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    height: top; /* Maintains the aspect ratio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px; /* Positive value for proper spacing */
+    width: 100%;
+}
+
+ /* Flexbox Container */
+ .results-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Space between boxes */
+    margin: 20px;
+}
+
+/* Individual Boxes */
+.result-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create a 3-column layout */
+    gap: 10px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.result-box h2 {
+    grid-column: span 2; /* This makes the heading span all 3 columns */
+    margin-bottom: 20px; /* Adds some space between the heading and the boxes */
+    text-align: center; /* Ensures the heading is centered within its container */
+}
+
+.result-box a {
+    font-size: 24px;
+    font-weight: bold;
+    grid-column: span 2; /* This makes the heading span all 3 columns */
+    margin-bottom: 20px; /* Adds some space between the heading and the boxes */
+    text-align: center; /* Ensures the heading is centered within its container */
+}
+
+.result-box p {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin: 0;
+    border: 1px solid #ddd;
+}
+
+.logo {
+    width: 200px; /* Adjust width as needed */
+    height: top; /* Maintains the aspect ratio */
+    animation: shrinkAndMove 1.1s ease-in-out forwards; /* Smooth shrink and move animation */
+}
+
+/* Animation for the logo to shrink and move to the top */
+@keyframes shrinkAndMove {
+    0% {
+        transform: scale(1000); /* Start larger */
+        opacity: 0;
+        top: 50%; /* Center initially */
+    }
+    50% {
+        opacity: 1; /* Fade in while shrinking */
+    }
+    100% {
+        transform: scale(1); /* Normal size */
+        top: 10%; /* Final position */
+    }
+}
+
+.fade {
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Adjust duration as needed */
+}
+
+.fade.show {
+    opacity: 1;
+}
+
+.content {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+    opacity: 0; /* Hidden initially */
+    animation: fadeIn 0.6s ease-in 1.2s forwards; /* Fade-in after logo animation */
+}
+
+/* Animation for content to fade in smoothly */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
