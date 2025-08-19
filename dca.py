@@ -6,7 +6,7 @@ import pandas as pd
 from flask import Flask, request, render_template, Response, make_response, jsonify  
 from datetime import datetime, timedelta
 
-file_path = r'C:\BITCOIN HISTORICAL PRICES\bitcoin_prices.xlsx'
+file_path = '/app/bitcoin_prices.xlsx'
 bitcoin_prices_df = pd.read_excel(file_path)
 bitcoin_prices_df['Date'] = pd.to_datetime(bitcoin_prices_df['Date'], format='%Y-%m-%d')
 bitcoin_prices_dict = dict(zip(bitcoin_prices_df['Date'].dt.date, bitcoin_prices_df['Price']))
@@ -18,7 +18,7 @@ app.config['JSON_AS_ASCII'] = False  # Allow non-ASCII characters in JSON respon
 def get_bitcoin_price_today():
     url = "https://api.coingecko.com/api/v3/simple/price"
     params = {"ids": "bitcoin", "vs_currencies": "usd"}
-    headers = {"x-api-key": "CG-nXoVwqf9hT61JsJa1fgFD4mk"}
+    headers = {"x-api-key": "key"}
     response = requests.get(url, params=params, headers=headers)
     if response.status_code == 200:
         data = response.json()
@@ -222,4 +222,4 @@ def chart():
     return render_template('chart.html', plot_url=plot_url)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
