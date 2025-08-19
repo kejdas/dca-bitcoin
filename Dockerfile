@@ -29,6 +29,9 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
+# Install cron (no need for compilers in final image)
+RUN apt-get update && apt-get install -y cron && rm -rf /var/lib/apt/lists/*
+
 # Copy installed packages from builder
 COPY --from=builder /install /usr/local
 
@@ -38,5 +41,9 @@ COPY . /app
 # Expose Flask port
 EXPOSE 5000
 
-# Run the app
-CMD ["python", "dca.py"]
+# Add cron job: example daily at 6 AM
+RUN echo "0 10 * * * root python /app/fetch_prices.py >> /var/log/cron.log 2>&1" >> /etc/crontab \
+    && touch /var/log/cron.log
+
+# Start cron + Flask app
+CMD ["sh", "-c", "cron && python /app/dca.py"]
