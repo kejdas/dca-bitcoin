@@ -3,11 +3,11 @@ import io
 import base64
 import requests
 import pandas as pd
-from flask import Flask, request, render_template, Response, make_response, jsonify  
+from flask import Flask, request, render_template, Response, make_response, jsonify
 from datetime import datetime, timedelta
 
-file_path = '/app/bitcoin_prices.xlsx'
-bitcoin_prices_df = pd.read_excel(file_path)
+file_path = 'bitcoin_prices.xlsx'
+bitcoin_prices_df = pd.read_excel(file_path, engine="openpyxl")
 bitcoin_prices_df['Date'] = pd.to_datetime(bitcoin_prices_df['Date'], format='%Y-%m-%d')
 bitcoin_prices_dict = dict(zip(bitcoin_prices_df['Date'].dt.date, bitcoin_prices_df['Price']))
 
@@ -18,7 +18,7 @@ app.config['JSON_AS_ASCII'] = False  # Allow non-ASCII characters in JSON respon
 def get_bitcoin_price_today():
     url = "https://api.coingecko.com/api/v3/simple/price"
     params = {"ids": "bitcoin", "vs_currencies": "usd"}
-    headers = {"x-api-key": "key"}
+    headers = {"x-api-key": "[insert_your_key]"}
     response = requests.get(url, params=params, headers=headers)
     if response.status_code == 200:
         data = response.json()
@@ -32,7 +32,7 @@ def get_bitcoin_price_today():
 
 def get_bitcoin_price_from_excel(date):
     return bitcoin_prices_dict.get(date.date(), None)
-     
+
 def calculate_dca(investment_value, purchase_interval, start_date, end_date):
     total_investment = 0
     total_bitcoin = 0
@@ -51,7 +51,7 @@ def calculate_dca(investment_value, purchase_interval, start_date, end_date):
             total_bitcoin += bitcoin_purchased
         else:
             print(f"Skipping {current_date}: {price_on_date}")  # Error message from API
-      
+
         # Increment the date based on the purchase interval
         current_date += purchase_interval
     # Get today's price and calculate the current value
@@ -61,7 +61,7 @@ def calculate_dca(investment_value, purchase_interval, start_date, end_date):
     value_on_end_date = total_bitcoin * price_on_end_date
 
     end_date_profit = value_on_end_date - total_investment
-    
+
     # Ensure that current_price is valid before using it
     if current_price is not None and isinstance(current_price, (float, int)):
         current_value = current_price * total_bitcoin
@@ -98,7 +98,7 @@ def calculate_dca(investment_value, purchase_interval, start_date, end_date):
 @app.route('/', methods=['GET','POST'])
 def index():
     oldest_date = bitcoin_prices_df['Date'].iloc[1]
-    min_date = (oldest_date - timedelta(days=1)).strftime('%Y-%m-%d') 
+    min_date = (oldest_date - timedelta(days=1)).strftime('%Y-%m-%d')
     max_date = datetime.today().date()
 
     print("Request Headers:", request.headers)
