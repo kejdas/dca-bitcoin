@@ -6,7 +6,7 @@ import os
 import time
 
 # API Key for CoinGecko (if required)
-API_KEY = 'CG-nXoVwqf9hT61JsJa1fgFD4mk'
+API_KEY = '[your_api_key]'
 
 # Fetch historical Bitcoin prices using CoinGecko API with API Key
 def get_bitcoin_price_on_date(date):
