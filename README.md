@@ -2,7 +2,6 @@
 
 A lightweight Flask web app to simulate Bitcoin Dollar Cost Averaging (DCA), compute investment metrics over a historical range, and visualize progress. Historical prices come from an Excel file maintained via a small fetcher script; today's price is queried from CoinGecko.
 
-\
 ## 🌟 Features
 
 ### DCA Simulation
