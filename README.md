@@ -88,7 +88,19 @@ README.md              # Quickstart instructions
 python dca.py
 ```
 
-### Docker
+### 🐳 Run with Docker
+1. Build the Docker Image
+```bash
+docker build -t dca-bitcoin .
+```
+
+2. Run the Container
+```bash
+docker run -d -p 5000:5000 --name dca-bitcoin dca-bitcoin
+```
+
+Now open your browser:
+http://localhost:5000
 
 * Multi-stage build; cron installed
 * Cron job (daily at 10:00):
