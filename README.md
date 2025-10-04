@@ -96,7 +96,7 @@ docker build -t dca-bitcoin .
 
 2. Run the Container
 ```bash
-docker run -d -p 5000:5000 --name dca-bitcoin dca-bitcoin
+docker run -d -p 8080:8080 --name dca-bitcoin dca-bitcoin
 ```
 
 Now open your browser:
@@ -127,7 +127,7 @@ http://localhost:5000
 
 ## 🎬 Quick Demo Flow
 
-1. Open `http://localhost:5000`
+1. Open `http://localhost:8080`
 2. Enter amount, choose interval, select dates
 3. Click **Calculate DCA** to see results
 4. Click **View Chart** for time-series visualization </details>
