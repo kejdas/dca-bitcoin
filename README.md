@@ -100,7 +100,7 @@ docker run -d -p 8080:8080 --name dca-bitcoin dca-bitcoin
 ```
 
 Now open your browser:
-http://localhost:5000
+http://localhost:8080
 
 * Multi-stage build; cron installed
 * Cron job (daily at 10:00):
