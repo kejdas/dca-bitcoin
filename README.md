@@ -88,6 +88,9 @@ README.md              # Quickstart instructions
 python dca.py
 ```
 
+### ☁️ Run with GCP using gcloud 
+YT tutorial: https://www.youtube.com/watch?v=V0Uw8wtpDEM
+
 ### 🐳 Run with Docker
 1. Build the Docker Image
 ```bash
