@@ -1,4 +1,4 @@
-# Bitcoin DCA Calculator 🪙
+# ₿itcoin DCA Calculator 
 
 A lightweight Flask web application for simulating Bitcoin Dollar Cost Averaging (DCA) strategies. Calculate investment metrics over historical periods and visualize your progress with interactive charts.
 
